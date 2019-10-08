@@ -1,20 +1,14 @@
-import React, { useReducer } from 'react'
-import { ON_INPUT_CHANGE, reducer, intitialState } from '../reducer/reducer'
+import React from 'react'
 
-export default function Form () {
-    const [formValues, dispatch] = useReducer(reducer, intitialState)
+export default function Form (props) {
 
-    const handleChange = event => {
-        dispatch({
-            type: ON_INPUT_CHANGE,
-            payload: { value: event.target.value },
-        })
-    }
+    const { todos, handleChange, handleSubmit, formTodo, handleClear } = props;
 
     return (
-        <form >
-            <input onChange={handleChange} values={formValues} />
+        <form onSubmit={handleSubmit} >
+            <input onChange={handleChange} value={formTodo} />
             <button type='submit' >Add todo</button>
+            <button type='button' onClick={() => handleClear(todos)} >Clear Completed</button>
         </form>
     )
 }
